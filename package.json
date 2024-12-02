@@ -1,0 +1,37 @@
+{
+  "name": "pdfconverter",
+  "version": "1.0.0",
+  "description": "pdf converted",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
+  },
+  "keywords": [
+    "js",
+    "nodeJS",
+    "reactJS",
+    "expressJS"
+  ],
+  "author": "Himanshu Khairnar",
+  "license": "ISC",
+  "dependencies": {
+    "@ilovepdf/ilovepdf-nodejs": "^0.3.0",
+    "bcrypt": "^5.1.1",
+    "cloudinary": "^2.5.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "cros": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.11.0",
+    "mongoose": "^8.8.3",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "nodeman": "^1.1.2",
+    "nodemon": "^3.1.7",
+    "prettier": "^3.4.1"
+  }
+}
