@@ -14,8 +14,8 @@ app.use(express.urlencoded({ extended: true, limit: '16kb' }))
 
 
 import userRouter from './routes/user.routes.js'
-
+import pdfRouter from './routes/pdf.routes.js'
 
 app.use("/api/v1/users", userRouter)
-
+app.use("/api/v1/pdf", pdfRouter)
 export default app

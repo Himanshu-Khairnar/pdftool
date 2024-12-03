@@ -3,6 +3,7 @@ import ApiError from "../utils/ApiErrors.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+
 //for register
 const bcryption = (password) => {
     bcrypt.hash(password, 10, (err, hash) => {
