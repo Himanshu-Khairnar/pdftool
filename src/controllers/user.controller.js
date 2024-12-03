@@ -12,7 +12,6 @@ const bcryption = (password) => {
         return hash
     })
 }
-
 //for login
 const checkBcrypt = (password, hash,) => {
     bcrypt.compare(password, hash, (err, result) => {
@@ -22,17 +21,14 @@ const checkBcrypt = (password, hash,) => {
     })
 }
 
-
-
 //for login(access token and refresh token)
-const genToken = async ({ userId, userName, email }) => {
-    const accessToken = jwt.sign({ userId,userName, email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRY })
+const genToken = async ({ _id, userName, email }) => {
+    const user = await User.findOne({ _id: userId })
+    const accessToken = jwt.sign({ _id,userName, email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.ACCESS_TOKEN_EXPIRY })
     const refreshToken = jwt.sign({ userId }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: process.env.REFRESH_TOKEN_EXPIRY })
     await User.findOneAndUpdate({ _id: userId }, { refreshToken })
     return { accessToken, refreshToken }
 }
-
-
 
 export const regsiterUser = asyncHandler(async (req, res) => {
     try {
@@ -108,4 +104,31 @@ export const logoutUser = asyncHandler(async (req, res, next) => {
     }
 })
 
-//Refresh Token Remains
+export const RefreshToken = asyncHandler(async (req, res) => {
+    try {
+        const { refreshToken } = req.cookies.refreshToken || req.body.refreshToken
+        if (!refreshToken)
+            throw new ApiError(400, "Please login first")
+
+        const verify = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+        const user = await User.findById({ _id: verify._id })
+        if (!user)
+            throw new ApiError(400, "Please login first")
+        if(user.refreshToken !== refreshToken)
+            throw new ApiError(400, "Not Valid login again")
+
+        const { accessToken, refreshToken: newRefreshToken } = genToken(user)
+
+        const secureOptionns = {
+            httpOnly: true,
+            secure: true,
+        }
+
+        return res.status(200)
+            .cookie("refreshToken", newRefreshToken, secureOptionns)
+            .cookie("accessToken", accessToken, secureOptionns)
+            .json(new ApiResponse(200, { user, accessToken, refreshToken }, "User logged in successfully"))      
+    } catch (error) {
+        throw new ApiError(500, "Error while logging in user")
+    }
+})

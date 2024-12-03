@@ -1,10 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 
 const userSchema = new schema({
-    name:
+    userName:
     {
         type: String,
-        required: true
+        required: true,
+        unique: true
+        
     },
     email: 
     { 
@@ -21,7 +23,7 @@ const userSchema = new schema({
     { 
         type: Number,
         required: true,
-        default: 0 
+        default: 100
     },
     refreshToken: 
     { 
