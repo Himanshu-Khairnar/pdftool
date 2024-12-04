@@ -4,4 +4,7 @@ import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 const router = Router()
 router.use(verifyJWT)
-router.route('/service/:name').use(upload.single('file')).post(service)
+router.post('/service/:name', verifyJWT, upload.single('file'), service);
+
+
+export default router

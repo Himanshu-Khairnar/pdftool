@@ -1,7 +1,7 @@
-import { ApiError } from "../utils/ApiErrors"
+import ApiError from "../utils/ApiErrors.js"
 import ILovePDFApi from "@ilovepdf/ilovepdf-nodejs"
-import { ApiResponse } from "../utils/ApiResponse"
-import { asyncHandler } from "../utils/asyncHandler";
+import ApiResponse  from "../utils/ApiResponse.js"
+import asyncHandler  from "../utils/asyncHandler.js";
 
 
 const instance = new ILovePDFApi(process.env.PUBLIC_KEY_ILOVEPDF, process.env.SECRET_KEY_ILOVEPDF);

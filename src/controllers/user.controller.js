@@ -31,7 +31,7 @@ const genToken = async ({ _id, userName, email }) => {
     return { accessToken, refreshToken }
 }
 
-export const regsiterUser = asyncHandler(async (req, res) => {
+export const registerUser = asyncHandler(async (req, res) => {
     try {
         const { userName, email, password } = req.body
         if (!userName || !email || !password)
@@ -82,7 +82,7 @@ export const loginUser = asyncHandler(async (req, res) => {
     }
 });
 
-export const logoutUser = asyncHandler(async (req, res, next) => {
+export const logoutUser = asyncHandler(async (req, res) => {
     try {
         const logout = await user.findOneAndUpdate(
             { _id: req.user._id },
