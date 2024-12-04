@@ -8,6 +8,5 @@ const router =Router()
 router.route("/register").post(regsiterUser)
 router.route("/login").post(loginUser)
 router.route("/logout").use(verifyJWT).get(logoutUser)
-
-
+router.route("/refresh").use(verifyJWT).post(RefreshToken)
 export default router
