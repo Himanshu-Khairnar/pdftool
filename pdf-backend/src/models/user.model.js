@@ -6,37 +6,37 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true
-        
+
     },
-    email: 
-    { 
-        type: String, 
-        required: true,
-        unique: true 
-    },
-    password: 
-    { 
+    email:
+    {
         type: String,
-        required: true 
+        required: true,
+        unique: true
     },
-    credits: 
-    { 
+    password:
+    {
+        type: String,
+        required: true
+    },
+    credits:
+    {
         type: Number,
         required: true,
         default: 100
     },
-    refreshToken: 
-    { 
+    refreshToken:
+    {
         type: String,
-        required: true 
+        required: true
     },
-    history: 
-    { 
+    history:
+    {
         type: Array,
-        
+
         required: true,
-        default: [] 
+        default: []
     }
-})
+}, { timestamps: true })
 
 export default mongoose.model("user", userSchema)    
